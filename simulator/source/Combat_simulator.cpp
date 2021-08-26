@@ -370,7 +370,7 @@ void Combat_simulator::compute_hit_tables(const Special_stats& special_stats, co
     {
         int axe_crit = (weapon.weapon_type == Weapon_type::axe) ? config.talents.poleaxe_specialization : 0;
         crit += axe_crit;
-        
+
         auto white_dm = Damage_multipliers((100 - glance_dr) / 100, 2 * (1 + special_stats.crit_multiplier), 1);
 
         hit_table_white_mh_ = Hit_table("white (mh)", miss, dodge, glance, crit, white_dm);
@@ -559,7 +559,7 @@ void Combat_simulator::overpower(Weapon_sim& main_hand_weapon, Special_stats& sp
 {
     if (config.dpr_settings.compute_dpr_op_)
     {
-        swap_stance();
+        //swap_stance();
         spend_rage(5);
         buff_manager_.add_combat_buff(battle_stance_, time_keeper_.time);
         time_keeper_.overpower_cast(5.0);
@@ -572,7 +572,7 @@ void Combat_simulator::overpower(Weapon_sim& main_hand_weapon, Special_stats& sp
     double damage = main_hand_weapon.normalized_swing(special_stats.attack_power) + 35;
     auto hit_outcome = generate_hit(main_hand_weapon, damage, main_hand_weapon, hit_table_overpower_, special_stats,
                                     damage_sources);
-    swap_stance();
+    //swap_stance();
     spend_rage(5);
     if (hit_outcome.hit_result != Hit_result::miss && hit_outcome.hit_result != Hit_result::dodge)
     {
