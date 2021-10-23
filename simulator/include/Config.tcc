@@ -43,6 +43,9 @@ void Combat_simulator_config::parse_combat_simulator_config(const T& input)
     unleashed_rage_start_ = fv.find("unleashed_rage_dd");
     use_death_wish = String_helpers::find_string(input.options, "death_wish");
     use_sweeping_strikes = String_helpers::find_string(input.options, "use_sweeping_strikes");
+    enable_extra_bloodlust = String_helpers::find_string(input.options, "enable_extra_bloodlust");
+    extra_bloodlust_count_ = fv.find("extra_bloodlust_dd");
+    reverse_cooldown = String_helpers::find_string(input.options, "reverse_cooldown");
 
     deep_wounds = String_helpers::find_string(input.options, "deep_wounds");
 

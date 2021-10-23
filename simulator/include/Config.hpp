@@ -63,6 +63,9 @@ struct Combat_simulator_config
     double unleashed_rage_start_{};
     bool use_death_wish{};
     bool use_sweeping_strikes{};
+    bool enable_extra_bloodlust{};
+    double extra_bloodlust_count_{};
+    bool reverse_cooldown{};
 
     bool deep_wounds{};
 
