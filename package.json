@@ -4,12 +4,29 @@
   "description": "wow simulator",
   "main": "index.js",
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/css": "^11.7.1",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mdx-js/loader": "^1.6.22",
+    "@types/react": "^17.0.38",
     "express": "^4.17.1",
-    "node-static": "^0.7.11"
+    "next": "^12.0.7",
+    "node-static": "^0.7.11",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.5.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@emotion/babel-plugin": "^11.7.2",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "2.5.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cd website/ && next dev -p 5000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "repository": {
     "type": "git",
