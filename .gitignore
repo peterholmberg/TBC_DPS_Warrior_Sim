@@ -10,6 +10,7 @@ website/emscripten/
 /.pnp
 .pnp.js
 cmake-build*
+.yarn/*
 
 # testing
 /coverage
