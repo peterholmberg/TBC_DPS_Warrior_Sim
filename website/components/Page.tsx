@@ -1,15 +1,13 @@
-import React, { FC, ReactNode, useMemo } from "react";
+import { FC, ReactNode, useMemo } from "react";
 import { css } from "@emotion/css";
-import { Nav } from "./Nav";
 import Head from "next/head";
 import { Header } from "./Header";
-import { Footer } from "./Footer";
 
 interface PageProps {
   children: ReactNode | ReactNode[];
 }
 
-export const Page = ({ children }) => {
+export const Page: FC<PageProps> = ({ children }) => {
   const styles = useMemo(() => getStyles(), []);
   return (
     <div className={styles.page}>
@@ -19,11 +17,9 @@ export const Page = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-
       <div className={styles.pageContent}>
         <div className={styles.content}>{children}</div>
       </div>
-      <Footer />
     </div>
   );
 };
