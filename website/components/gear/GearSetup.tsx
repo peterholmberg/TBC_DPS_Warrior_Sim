@@ -11,7 +11,7 @@ import legs from "../../data/armor/legs";
 import feet from "../../data/armor/feet";
 import rings from "../../data/armor/ring";
 import trinkets from "../../data/armor/trinket";
-import ranged from "../../data/weapons/Ranged";
+import ranged from "../../data/weapons/ranged";
 import { mainHands, offHands } from "../../data/weapons";
 import { necks } from "../../data/armor/neck";
 import { backs } from "../../data/armor/back";
