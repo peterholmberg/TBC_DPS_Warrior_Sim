@@ -1,21 +1,21 @@
 import { css } from "@emotion/css";
-import { ChangeEvent, FC, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { useAppDispatch } from "../../state/hooks";
 import { selectSlot, setItem } from "../../state/gearSlice";
-import { SelectValue } from "../../types";
+import { SelectValue, Slot } from "../../types";
 
 interface Props {
   emptyOption: SelectValue;
   options: SelectValue[] | Record<string, SelectValue[]>;
   label: string;
-  propName: string;
+  slot: Slot;
 }
 
 export const ItemSelect: FC<Props> = ({
   emptyOption,
   options,
   label,
-  propName,
+  slot,
 }) => {
   const styles = useMemo(() => getStyles(), []);
   const dispatch = useAppDispatch();
@@ -26,9 +26,9 @@ export const ItemSelect: FC<Props> = ({
       <select
         className={styles.select}
         onChange={(event) => {
-          dispatch(setItem({ slot: propName, item: event.target.value }));
+          dispatch(setItem({ slot: slot, item: event.target.value }));
         }}
-        value={selectSlot(propName)}
+        value={selectSlot(slot)}
       >
         <option value={emptyOption.value} className={styles.option}>
           {emptyOption.label}

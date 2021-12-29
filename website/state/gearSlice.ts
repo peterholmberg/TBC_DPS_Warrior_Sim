@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
+import { Slot } from "../types";
 import { AppState } from "./store";
 
 export interface GearState {
@@ -41,7 +42,7 @@ const initialState: GearState = {
   offHand: "",
   ranged: "",
 };
-export type SlotItemInfo = { slot: string; item: string };
+export type SlotItemInfo = { slot: Slot; item: string };
 
 export const gearSlice = createSlice({
   name: "gear",
@@ -50,10 +51,15 @@ export const gearSlice = createSlice({
     setItem: (state, action: PayloadAction<SlotItemInfo>) => {
       state[action.payload.slot] = action.payload.item;
     },
+    setPreset: (state, action: PayloadAction<SlotItemInfo[]>) => {
+      action.payload.forEach((slotItemInfo) => {
+        state[slotItemInfo.slot] = slotItemInfo.item;
+      });
+    },
   },
 });
 
-export const { setItem } = gearSlice.actions;
+export const { setItem, setPreset } = gearSlice.actions;
 
 export const selectSlot = (slot: string) =>
   useSelector((state: AppState) => state.gear[slot]);
