@@ -8,7 +8,7 @@ export interface WeaponSelect extends SelectValue {
   offHandOnly: boolean;
 }
 
-export enum Slot {
+export enum SlotName {
   Head = "head",
   Neck = "neck",
   Shoulders = "shoulders",
@@ -26,4 +26,10 @@ export enum Slot {
   MainHand = "mainHand",
   OffHand = "offHand",
   Ranged = "ranged",
+}
+
+export interface Slot {
+  item: string;
+  gems: string[];
+  enchant: string;
 }
