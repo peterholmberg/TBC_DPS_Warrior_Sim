@@ -52,9 +52,9 @@ export const gearSlice = createSlice({
       state[action.payload.slot] = action.payload.item;
     },
     setPreset: (state, action: PayloadAction<SlotItemInfo[]>) => {
-      action.payload.forEach((slotItemInfo) => {
+      for (const slotItemInfo of action.payload) {
         state[slotItemInfo.slot] = slotItemInfo.item;
-      });
+      }
     },
   },
 });
