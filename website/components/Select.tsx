@@ -1,12 +1,12 @@
-import { css } from "@emotion/css";
-import { ChangeEvent, FC, useMemo } from "react";
-import { SelectValue, SlotName } from "../types";
+import ReactSelect from "react-select";
+import { FC } from "react";
+import { GroupedSelectValue, SelectValue } from "../types";
 
 interface Props {
   emptyOption: SelectValue;
-  options: SelectValue[] | Record<string, SelectValue[]>;
-  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-  value: string;
+  options: SelectValue[] | GroupedSelectValue[];
+  onChange: (value: SelectValue) => void;
+  value: SelectValue;
 }
 
 export const Select: FC<Props> = ({
@@ -15,58 +15,13 @@ export const Select: FC<Props> = ({
   onChange,
   value,
 }) => {
-  const styles = useMemo(() => getStyles(), []);
-
   return (
-    <select className={styles.select} onChange={onChange} value={value}>
-      <option value={emptyOption.value} className={styles.option}>
-        {emptyOption.label}
-      </option>
-      {Array.isArray(options)
-        ? renderOptions(options)
-        : renderOptionWithOptionGroups(options, styles)}
-    </select>
+    <ReactSelect<SelectValue, false, GroupedSelectValue>
+      options={options}
+      defaultValue={emptyOption}
+      styles={{ control: (styles) => ({ ...styles, minWidth: "200px" }) }}
+      value={value}
+      onChange={onChange}
+    />
   );
 };
-
-function renderOptions(options: SelectValue[]) {
-  return options.map((option, index) => {
-    return (
-      <option key={`${option.value}-${index}`} value={option.value}>
-        {option.label}
-      </option>
-    );
-  });
-}
-
-function renderOptionWithOptionGroups(
-  options: Record<string, SelectValue[]>,
-  styles: Styles
-) {
-  return Object.entries(options).map(([key, options], index) => {
-    return (
-      <optgroup key={`${key}=${index}`} className={styles.option} label={key}>
-        {options.map((option, index) => {
-          return (
-            <option key={`${option.value}-${index}`} value={option.value}>
-              {option.label}
-            </option>
-          );
-        })}
-      </optgroup>
-    );
-  });
-}
-
-const getStyles = () => {
-  return {
-    select: css`
-      max-width: 200px;
-    `,
-    option: css`
-      text-transform: capitalize;
-    `,
-  };
-};
-
-type Styles = ReturnType<typeof getStyles>;

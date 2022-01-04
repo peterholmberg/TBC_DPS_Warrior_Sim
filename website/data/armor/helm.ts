@@ -74,8 +74,10 @@ const leatherHelms: SelectValue[] = [
   { value: "wastewalker_helm", label: "Wastewalker Helm" },
 ];
 
-export default {
-  plate: plateHelms,
-  mail: mailHelms,
-  leather: leatherHelms,
-};
+export default [
+  { label: "Plate", options: plateHelms },
+  { label: "Mail", options: mailHelms },
+  { label: "Leather", options: leatherHelms },
+];
+
+export const allHelms = [...plateHelms, ...mailHelms, leatherHelms];

@@ -1,12 +1,12 @@
-import { SelectValue, SlotName } from "../../types";
+import { FC } from "react";
 import { Select } from "../Select";
 import { useAppDispatch } from "../../state/hooks";
 import { selectSlotItem, setItem } from "../../state/gearSlice";
-import { FC } from "react";
+import { GroupedSelectValue, SelectValue, SlotName } from "../../types";
 
 interface Props {
   slotName: SlotName;
-  options: SelectValue[] | Record<string, SelectValue[]>;
+  options: SelectValue[] | GroupedSelectValue[];
   emptyOption: SelectValue;
 }
 
@@ -16,11 +16,10 @@ export const ItemSelect: FC<Props> = ({ emptyOption, options, slotName }) => {
     <Select
       emptyOption={emptyOption}
       options={options}
-      slot={slotName}
-      onChange={(event) => {
-        dispatch(setItem({ slot: slotName, item: event.target.value }));
-      }}
-      selector={selectSlotItem(slotName)}
+      onChange={(value) =>
+        dispatch(setItem({ slot: slotName, item: value.value }))
+      }
+      value={selectSlotItem(slotName)}
     />
   );
 };

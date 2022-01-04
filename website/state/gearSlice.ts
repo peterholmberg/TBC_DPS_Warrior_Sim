@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import { Slot, SlotName } from "../types";
+import armor from "../data/armor";
+import { SelectValue, Slot, SlotName } from "../types";
 import { AppState } from "./store";
 
 export interface GearState {
@@ -137,8 +138,13 @@ export const gearSlice = createSlice({
 
 export const { setItem, setPreset, setEnchant, setGems } = gearSlice.actions;
 
-export const selectSlotItem = (slot: SlotName) =>
-  useSelector((state: AppState) => state.gear[slot].item);
+export const selectSlotItem = (slot: SlotName) => {
+  const items = armor[slot];
+  return useSelector((state: AppState) =>
+    items.find((item) => item.value === state.gear[slot].item)
+  );
+};
+  
 
 export const selectSlotEnchant = (slot: SlotName) =>
   useSelector((state: AppState) => state.gear[slot].enchant);

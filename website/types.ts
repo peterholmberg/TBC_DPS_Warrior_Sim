@@ -3,6 +3,11 @@ export interface SelectValue {
     label: string;
 }
 
+export interface GroupedSelectValue {
+  label: string;
+  options: SelectValue[];
+}
+
 export interface WeaponSelect extends SelectValue {
   mainHandOnly: boolean;
   offHandOnly: boolean;
