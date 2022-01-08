@@ -29,7 +29,7 @@ const getStyles = () => {
     page: css``,
     pageContent: css`
       margin: 0 auto 40px;
-      max-width: 900px;
+      max-width: 1050px;
     `,
     content: css`
       padding: 8px;

@@ -19,7 +19,22 @@ export const Select: FC<Props> = ({
     <ReactSelect<SelectValue, false, GroupedSelectValue>
       options={options}
       defaultValue={emptyOption}
-      styles={{ control: (styles) => ({ ...styles, minWidth: "200px" }) }}
+      styles={{
+        control: (styles) => ({
+          ...styles,
+          minWidth: "200px",
+          minHeight: "32px",
+        }),
+        valueContainer: (styles) => ({
+          ...styles,
+          height: "20px",
+          padding: "0 8px",
+        }),
+        input: (styles) => ({
+          ...styles,
+          padding: 0,
+        }),
+      }}
       value={value}
       onChange={onChange}
     />

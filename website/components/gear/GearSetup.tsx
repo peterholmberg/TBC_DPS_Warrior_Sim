@@ -23,7 +23,6 @@ export const GearSetup = () => {
   const styles = useMemo(() => getStyles(), []);
   return (
     <div className={styles.wrapper}>
-      <Presets />
       <div className={styles.gearSelect}>
         <div className={styles.column}>
           <Slot

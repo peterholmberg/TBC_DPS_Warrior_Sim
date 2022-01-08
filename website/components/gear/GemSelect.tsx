@@ -49,7 +49,7 @@ export const GemSelect: FC<Props> = ({ slot }) => {
         onChange={(value) => {
           setGemsFromState(value.value, 2);
         }}
-        value={allGems.find((gem) => equippedGems[2])}
+        value={allGems.find((gem) => gem.value === equippedGems[2])}
       />
     </div>
   );
