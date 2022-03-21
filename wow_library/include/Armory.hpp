@@ -281,7 +281,6 @@ struct Armory
                 {"cloak_of_the_fallen_god", Attributes{11.0, 26.0}, Special_stats{0.0, 0.0, 0.0, 0, 0.0}, Socket::back}, 
 
                 // Phase 2
-                {"cloak_of_darkness", Attributes{23.0, 0.0}, Special_stats{1.0869565217391306, 0.0, 0.0, 0, 0.0}, Socket::back}, 
                 {"thalassian_wildercloak", Attributes{0.0, 28.0}, Special_stats{0.0, 0.0, 68.0, 0, 0.0}, Socket::back}, 
                 {"razor_scale_battlecloak", Attributes{33.0, 23.0}, Special_stats{0.0, 0.0, 0.0, 0, 0.0}, Socket::back}, 
                 {"crystalweave_cape", Attributes{0.0, 15.0}, Special_stats{0.0, 0.0, 0.0, 0, 0.01648700063}, Socket::back}, 
@@ -291,7 +290,8 @@ struct Armory
                 {"cloak_of_darkness", Attributes{23.0, 0.0}, Special_stats{1.0869565217391306, 0.0, 0.0, 0, 0.0}, Socket::back}, 
 
                 // Phase 4
-                {"dorys_embrace", Attributes{0.0, 0.0}, Special_stats{0.9057971014, 0.0, 46.0, 0, 0.00, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 112}, Socket::back}
+                {"dorys_embrace", Attributes{0.0, 0.0}, Special_stats{0.9057971014, 0.0, 46.0, 0, 0.00, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 112}, Socket::back},
+                {"cloak_of_fiends", Attributes{0.0, 0.0}, Special_stats{0.0, 0.0, 46.0, 0, 0.01585288523}, Socket::back}
             };
 
     std::vector<Armor> chest_t
@@ -391,6 +391,7 @@ struct Armory
                 {"bindings_of_lighting_reflexes", Attributes{0.0, 21.0}, Special_stats{0.0, 0.0, 56.0, 0, 0.017121116043119847}, Socket::wrist}, 
                 {"swiftstrike_bracers", Attributes{0.0, 20.0}, Special_stats{0.0, 0.0, 50.0, 0, 0.017121116043119847}, Socket::wrist}, 
                 {"swiftsteel_bracers", Attributes{35.0, 0.0}, Special_stats{0.0, 0.0, 0.0, 0, 0.017121116043119847}, Socket::wrist}, 
+                {"vindicators_plate_bracers", Attributes{25.0, 0.0}, Special_stats{0.9510869565, 0.0, 0.0}, Socket::wrist}, 
             };
 
     std::vector<Armor> hands_t
@@ -493,6 +494,9 @@ struct Armory
                 {"belt_of_seething_fury", Attributes{48.0, 0.0}, Special_stats{0.0, 0.0, 0.0, 0, 0.024096385542168676}, Socket::belt}, 
                 {"valestalker_girdle", Attributes{0.0, 27.0}, Special_stats{0.0, 0.0, 76.0, 0, 0.022828154724159798}, Socket::belt}, 
                 {"vindicators_plate_belt", Attributes{35.0, 0.0}, Special_stats{1.585144927536232, 0.0, 0.0, 0, 0.0}, Socket::belt}, 
+
+                // Phase 4
+                {"chain_of_unleashed_rage", Attributes{34.0, 0.0}, Special_stats{0.0, 0.8877615726062144, 0.0, 0, 0.00, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 154}, Socket::belt}, 
             };
 
     std::vector<Armor> legs_t
@@ -588,6 +592,7 @@ struct Armory
                 {"shadowmasters_boots", Attributes{0.0, 30.0}, Special_stats{0.7699275362318841, 0.0, 76.0, 0, 0.0}, Socket::boots}, 
                 {"quickstriders_moccasins", Attributes{0.0, 28.0}, Special_stats{0.0, 0.9511731135066582, 58.0, 0, 0.0}, Socket::boots}, 
                 {"black_featherlight_boots", Attributes{0.0, 0.0}, Special_stats{0.0, 2.155992390615092, 98.0, 0, 0.0}, Socket::boots}, 
+                {"vindicators_plate_greaves", Attributes{35.0, 0.0}, Special_stats{1.585144928, 0.0, 0.0}, Socket::boots}, 
             };
 
     std::vector<Armor> ring_t
@@ -636,7 +641,7 @@ struct Armory
                 {"unstoppable_aggressors_ring", Attributes{36.0, 0.0}, Special_stats{1.358695652173913, 0.0, 0.0, 0, 0.0}, Socket::ring}, 
                 {"stormrage_signet_ring", Attributes{0.0, 0.0}, Special_stats{0.0, 1.9023462270133165, 66.0, 0, 0.00, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 126}, Socket::ring}, 
                 {"vindicators_band_of_triumph", Attributes{0.0, 0.0}, Special_stats{1.177536231884058, 0.0, 44.0, 0, 0.00, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 56}, Socket::ring}, 
-                {"band_of_the_eternal_champion", Attributes{0.0, 29.0}, Special_stats{0.0, 0.0, 60.0, 0, 0.0}, Socket::ring, Set::none, {{"band_of_the_eternal_champion", Hit_effect::Type::stat_boost, {}, {0, 0, 160}, 0, 10, 60, 1}}}, 
+                {"band_of_the_eternal_champion", Attributes{0.0, 29.0}, Special_stats{0.0, 0.0, 60.0, 0, 0.0}, Socket::ring, Set::none, {{"band_of_the_eternal_champion", Hit_effect::Type::stat_boost, {}, {0, 0, 160}, 0, 10, 60, 0, 0, 1, 0, 0, 1}}}, 
 
                 // Phase 4
                 {"signet_of_primal_wrath", Attributes{0.0, 28.0}, Special_stats{0.0, 0.0, 58.0, 0, 0.00, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 126}, Socket::ring},  
@@ -721,7 +726,7 @@ struct Armory
 
                 // Phase 4
                 {"ancient_amani_longbow", Attributes{0.0, 0.0}, Special_stats{0.0, 0.0, 38.0, 0, 0.00, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 126}, Socket::ranged}, 
-                {"tuskbreaker", Attributes{0.0, 0.0}, Special_stats{0.0, 1.141407736, 38.0}, Socket::ranged}, 
+                {"tuskbreaker", Attributes{0.0, 0.0}, Special_stats{0.0, 0.0, 38.0, 0, 0.01141407736}, Socket::ranged}, 
 
             };
 
@@ -766,10 +771,11 @@ struct Armory
                 {"warglaive_of_azzinoth_mh_non_demon", Attributes{0.0, 22.0}, Special_stats{0.0, 1.3316423589093216, 44.0, 0, 0.0}, 2.8, 214, 398, Weapon_socket::main_hand, Weapon_type::sword, {}, Set::the_twin_blades_of_azzinoth_non_demon},
                 {"blade_of_infamy", Attributes{0.0, 28.0}, Special_stats{0.0, 0.0, 56.0, 0, 0.0}, 2.6, 182, 339, Weapon_socket::one_hand, Weapon_type::sword},
                 {"vengeful_gladiators_slicer", Attributes{0.0, 0.0}, Special_stats{0.9510869565, 0.5072923272, 34.00, 0.00, 0, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 49}, 2.6, 214, 322, Weapon_socket::one_hand, Weapon_type::sword}, 
-                {"vengeful_gladiators_quickblade", Attributes{0.0, 0.0}, Special_stats{0.9510869565, 0.5072923272, 34.00, 0.00, 0, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 49}, 1.5, 108, 201, Weapon_socket::one_hand, Weapon_type::sword}, 
+                {"vengeful_gladiators_quickblade", Attributes{0.0, 0.0}, Special_stats{0.9510869565, 0.5072923272, 34.00, 0.00, 0, 0, 0, 0, 0, 0, 0, 0.0, 0, 0, 0, 49}, 1.5, 108, 201, Weapon_socket::one_hand, Weapon_type::sword},
+                {"the_unbreakable_will", Attributes{0.0, 0.0}, Special_stats{0.0, 0.0, 0.0,}, 1.6, 112, 209, Weapon_socket::one_hand, Weapon_type::sword},
                 // off_hand
-                {"warglaive_of_azzinoth_oh", Attributes{0.0, 0.0}, Special_stats{1.0416666666666667, 0.0, 44, 0, 0.0}, 1.4, 107, 199, Weapon_socket::off_hand, Weapon_type::sword, {}, Set::the_twin_blades_of_azzinoth},
-                {"warglaive_of_azzinoth_oh_non_demon", Attributes{0.0, 0.0}, Special_stats{1.0416666666666667, 0.0, 44, 0, 0.0}, 1.4, 107, 199, Weapon_socket::off_hand, Weapon_type::sword, {}, Set::the_twin_blades_of_azzinoth_non_demon},
+                {"warglaive_of_azzinoth_oh", Attributes{0.0, 21.0}, Special_stats{1.0416666666666667, 0.0, 44, 0, 0.0}, 1.4, 107, 199, Weapon_socket::off_hand, Weapon_type::sword, {}, Set::the_twin_blades_of_azzinoth},
+                {"warglaive_of_azzinoth_oh_non_demon", Attributes{0.0, 21.0}, Special_stats{1.0416666666666667, 0.0, 44, 0, 0.0}, 1.4, 107, 199, Weapon_socket::off_hand, Weapon_type::sword, {}, Set::the_twin_blades_of_azzinoth_non_demon},
            };
 
 
@@ -966,7 +972,7 @@ struct Armory
         {Set::destroyer, 4, "destroyer-4pc (4t5)"},
         {Set::onslaught, 2, "onslaught-2pc (2t6)"},
         {Set::onslaught, 4, "onslaught-4pc (4t6)"},
-        {Set::the_fists_of_fury, 2, "the_fists_of_fury", {}, {}, {"the_fists_of_fury", Hit_effect::Type::damage_magic, {}, {}, 125, 0, 0, 0, 0, 0, 0, 0, 1}},
+        {Set::the_fists_of_fury, 2, "the_fists_of_fury", {}, {}, {"the_fists_of_fury", Hit_effect::Type::damage_magic, {}, {}, 125, 0, 0, 0, 0, 0, 0, 0, 2}},
         {Set::the_twin_blades_of_azzinoth, 2, "the_twin_blades_of_azzinoth", {}, {0, 0, 200}, {"the_twin_blades_of_azzinoth", Hit_effect::Type::stat_boost, {}, {0, 0, 0, 0, 0.2853519341}, 0, 10, 45, 0, 0, 0, 0, 0, 1}},
         {Set::the_twin_blades_of_azzinoth_non_demon, 2, "the_twin_blades_of_azzinoth_non_demon", {}, {}, {"the_twin_blades_of_azzinoth_non_demon", Hit_effect::Type::stat_boost, {}, {0, 0, 0, 0, 0.2853519341}, 0, 10, 45, 0, 0, 0, 0, 0, 1}},
         

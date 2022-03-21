@@ -319,9 +319,20 @@ Combat_simulator::Hit_outcome Combat_simulator::generate_hit(Sim_state& state, c
     {
         if (hit_outcome.hit_result == Hit_result::crit)
         {
-            // deep wound double dips from +damage: it's additionally added to each tick
+            // Emrus researched the following formula:
+            //  ((DW_Mod * (AvgWeaponDamage + ModDamageDone) * WeaponMult * PersonalDamageMult + ModDamageDone) * PersonalDamageMult * Bleed + ModDamageTaken) * TargetDamageMult
+            // to actually use it, "damage_mod_physical" would have to be split into
+            //  - mod_damage_done% (e.g. Death Wish, Ferocious Inspiration; deep wound double dips from these)
+            //  - weapon_damage_done% (e.g. 1H/2H weapon spec; this might just be calculated here, locally)
+            //  - mod_damage_taken% (blood frenzy)
+
             const auto& ss = state.special_stats;
-            deep_wound_effect_.damage = (0.25 * state.talents.deep_wounds * 0.2 * state.main_hand_weapon.swing(ss) + ss.bonus_damage) * (1 + ss.damage_mod_physical);
+            const auto& w = state.main_hand_weapon;
+
+            // deep wound double dips from "bonus damage": it's additionally added to each tick
+            // it also double dips from "damage_mod_physical", but is not affected by "bonus_attack_power"
+            deep_wound_effect_.damage = ((0.25 * state.talents.deep_wounds * 0.2) * (w.average_damage + ss.attack_power / 14 * w.swing_speed + ss.bonus_damage)
+                * (1 + ss.damage_mod_physical) + ss.bonus_damage) * (1 + ss.damage_mod_physical);
             buff_manager_.add_over_time_buff(deep_wound_effect_, time_keeper_.time);
         }
     }
@@ -375,13 +386,15 @@ void Combat_simulator::unbridled_wrath(Sim_state& state, const Weapon_sim& weapo
     }
 }
 
-bool Combat_simulator::start_cast_slam(bool mh_swing, const Weapon_sim& weapon)
+bool Combat_simulator::start_cast_slam(Sim_state& state, bool mh_swing, const Weapon_sim& weapon)
 {
-    if (mh_swing || weapon.next_swing - time_keeper_.time > config.combat.slam_spam_max_time)
+    double next_swing = to_millis(weapon.swing_speed) / (1 + state.special_stats.haste);
+
+    if (mh_swing && next_swing >= config.combat.slam_spam_max_time)
     {
         if ((mh_swing && rage > config.combat.slam_rage_thresh) || rage > config.combat.slam_spam_rage)
         {
-            logger_.print("Starting to cast slam.", " Latency: ", config.combat.slam_latency, " ms");
+            logger_.print("Starting to cast slam.", " Latency: ", config.combat.slam_latency, " ms.");
             slam_manager.cast_slam(time_keeper_.time + config.combat.slam_latency);
             time_keeper_.global_cast(1500 + config.combat.slam_latency);
             spend_rage(15); // reserve slam cost, to prevent usage while slam is casting (e.g. use effects)
@@ -1367,12 +1380,12 @@ void Combat_simulator::execute_phase(Sim_state& state, bool mh_swing)
         }
     }
 
-    if (config.combat.use_slam && config.combat.use_sl_in_exec_phase)
+    if (config.combat.use_slam && state.main_hand_weapon.weapon_socket == Weapon_socket::two_hand && config.combat.use_sl_in_exec_phase)
     {
         assert(!slam_manager.is_slam_casting());
         if (rage >= 15)
         {
-            if (start_cast_slam(mh_swing, state.main_hand_weapon))
+            if (start_cast_slam(state, mh_swing, state.main_hand_weapon))
             {
                 return;
             }
@@ -1454,12 +1467,12 @@ void Combat_simulator::normal_phase(Sim_state& state, bool mh_swing)
         }
     }
 
-    if (config.combat.use_slam)
+    if (config.combat.use_slam && state.main_hand_weapon.weapon_socket == Weapon_socket::two_hand)
     {
         assert(!slam_manager.is_slam_casting());
         if (rage >= 15)
         {
-            if (start_cast_slam(mh_swing, state.main_hand_weapon))
+            if (start_cast_slam(state, mh_swing, state.main_hand_weapon))
             {
                 return;
             }
@@ -1698,7 +1711,7 @@ void Combat_simulator::add_use_effects(const Character& character)
         double available_time = config.sim_time - 40;
         if (available_time > 0)
         {
-            auto duration = std::min(config.sim_time - 40, 40 * config.extra_bloodlust_count_);
+            auto duration = std::min(std::max(available_time, 40.0), 40 * config.extra_bloodlust_count_);
             use_effects_.emplace_back(
                 Use_effect{"extra_bloodlust", Use_effect::Effect_socket::unique, {}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, .3},
                           0, duration, 600, false});
